@@ -19,7 +19,7 @@ module.exports = function(robot) {
     });
     //HIT THE REST ENDPOINT AND GET THE DATA
     return robot.respond(/data/i, function(res) {
-      return res.http("https://api.covid19api.com/summary").header('Accept', 'application/json', {
+      return res.http("https://data.covid19india.org/v4/min/data.min.json").header('Accept', 'application/json', {
         'Content-Type': 'application/json'
       }).get()(function(err, httpres, body) {
         var data;
@@ -29,7 +29,8 @@ module.exports = function(robot) {
         if (err) {
           httpres.send("Error!");
         } else {
-          return res.send(`${data.Countries[7].Country}` + "\thas the country code as\t" + `${data.Countries[7].CountryCode}`);
+               return res.send(`${data.AN.districts.Nicobars.total.vaccinated}` + "\t Nicobar total population\t");
+	       //return res.send(`${data.Countries[7].Country}` + "\thas the country code as\t" + `${data.Countries[7].CountryCode}`);
         }
       });
     });
